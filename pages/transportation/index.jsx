@@ -8,13 +8,11 @@ const damn = matrix([
     [13, 40],
 ]); // Matrix
 
-
-
 export default function index(params) {
     // const [cells, setCells] = useState(damn);
 
     function updateCells(i, j, newValue) {
-        damn._data[i][j] = newValue
+        damn._data[i][j] = newValue;
         console.log(damn._data);
     }
 
