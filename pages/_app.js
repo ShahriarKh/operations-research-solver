@@ -1,12 +1,14 @@
 import AppLayout from "../Components/Layouts/AppLayout";
 import Sidebar from "../Components/organisms/Sidebar";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 
 function MyApp({ Component, pageProps }) {
     return (
         <AppLayout>
             <Sidebar />
-            <Component {...pageProps} />
+            <main className={`main`}>
+                <Component {...pageProps} />
+            </main>
         </AppLayout>
     );
 }

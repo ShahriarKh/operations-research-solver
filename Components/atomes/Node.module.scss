@@ -1,0 +1,23 @@
+@use "colors" as *;
+
+.input {
+    // background: none;
+    background-color: $grey;
+    padding: 4px;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    width: 100px;
+    text-align: center;
+
+    &:focus {
+        outline: solid 2px $teal;
+    }
+}
+
+.box {
+    // background-color: $grey;
+    padding: 12px;
+    border: solid 1px $grey;
+    border-radius: 8px;
+}

@@ -9,3 +9,13 @@ a {
   margin: 0;
   font-family: "Jetbrains Mono", Consolas, 'Courier New', Courier, monospace;
 }
+
+html, body {
+  color: white;
+}
+
+.main {
+  // background-color: red;
+  overflow: scroll;
+  scrollbar-width: thin;
+}
