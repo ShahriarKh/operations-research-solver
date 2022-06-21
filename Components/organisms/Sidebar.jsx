@@ -1,11 +1,12 @@
 import Link from "next/link";
+import NextNavLink from "../NextNavlink";
 import css from "./Sidebar.module.scss";
 
 export default function Sidebar(params) {
     const pages = [
         { link: "/", label: "Home", icon: "home" },
         { link: "/transportation", label: "Transportation", icon: "route" },
-        { link: "/transportation", label: "Transshipment", icon: "sitemap" },
+        { link: "/transshipment", label: "Transshipment", icon: "sitemap" },
         { link: "/graphical", label: "Graphical", icon: "chart-dots" },
     ];
 
@@ -16,12 +17,12 @@ export default function Sidebar(params) {
                     {pages.map((page) => {
                         return (
                             <li>
-                                <Link href={page.link}>
+                                <NextNavLink href={page.link} activeClassName={css.active}>
                                     <a>
                                         <i class={`ti ti-${page.icon}`} />
                                         {page.label}
                                     </a>
-                                </Link>
+                                </NextNavLink>
                             </li>
                         );
                     })}

@@ -1,7 +1,16 @@
 @use "styles/colors" as *;
 
+
+.active {
+    // background-color: $teal;
+    border-left: solid 2px $teal;
+    color: $teal;
+    background-color: transparentize($teal, 0.95)
+}
+
+
 .sidebar {
-    width: 240px;
+    width: 260px;
     background-color: $grey-dark;
     box-shadow: -2px 0 18px rgb(0, 0, 0, 0.5);
     color: white;
@@ -11,15 +20,15 @@
         a {
             // width: 100%;
             display: flex;
-            gap: 12px;
+            gap: 10px;
             align-items: center;
             padding: 8px 10px;
-            border-radius: 6px;
+            margin-bottom: 6px;
+            // border-radius: 6px;
             transition: all 0.1s;
 
             &:hover {
-                background-color: $teal;
-                
+                @extend .active;
             }
         }
     }
