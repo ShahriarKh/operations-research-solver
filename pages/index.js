@@ -82,7 +82,7 @@ export default function Home() {
     );
 
     return (
-        <div style={{ height: "auto", width: "100%", direction: "ltr" }}>
+        <div style={{ height: "auto", width: "100%" }}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}

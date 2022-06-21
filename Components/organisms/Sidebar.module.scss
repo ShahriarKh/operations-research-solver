@@ -1,9 +1,30 @@
-@use "../../styles/colors" as *;
+@use "styles/colors" as *;
 
 .sidebar {
-    width: 200px;
+    width: 240px;
     background-color: $grey-dark;
     box-shadow: -2px 0 18px rgb(0, 0, 0, 0.5);
     color: white;
-    padding: 24px;
+    padding: 24px 16px;
+
+    li {
+        a {
+            // width: 100%;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            padding: 8px 10px;
+            border-radius: 6px;
+            transition: all 0.1s;
+
+            &:hover {
+                background-color: $teal;
+                
+            }
+        }
+    }
+
+    ul {
+        list-style-type: none;
+    }
 }
