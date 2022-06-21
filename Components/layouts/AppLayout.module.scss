@@ -1,0 +1,8 @@
+@use "colors" as *;
+
+.grid {
+    background-color: $grey-dark;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}

@@ -1,7 +1,14 @@
-import '../styles/globals.css'
+import AppLayout from "../Components/Layouts/AppLayout";
+import Sidebar from "../Components/organisms/Sidebar";
+import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+    return (
+        <AppLayout>
+            <Sidebar />
+            <Component {...pageProps} />
+        </AppLayout>
+    );
 }
 
-export default MyApp
+export default MyApp;

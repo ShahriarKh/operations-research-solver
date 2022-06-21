@@ -10,11 +10,12 @@ import ReactFlow, {
 const initialNodes = [
     {
         id: "s1",
-        data: { label: <input /> },
+        data: { label: <p>salam</p> },
         position: {
             x: 0,
             y: 0,
         },
+        sourcePosition: 'right',
     },
 
     {
@@ -22,17 +23,19 @@ const initialNodes = [
         data: { label: "Supplier 2" },
         position: {
             x: 0,
-            y: 200,
+            y: 60,
         },
+        sourcePosition: 'right',
     },
 
     {
         id: "d1",
         data: { label: "Demand 1" },
         position: {
-            x: 200,
+            x: 260,
             y: 0,
         },
+        targetPosition: 'left',
     },
 ];
 
@@ -53,6 +56,7 @@ const graphOptions = {
     panOnDrag: false,
     zoomOnScroll: false,
     zoomOnPinch: false,
+    // zoom
     snapToGrid: true,
     snapGrid: [60, 60],
     nodesDraggable: false
@@ -78,7 +82,7 @@ export default function Home() {
     );
 
     return (
-        <div style={{ height: "400px", width: "400px", background: "orange" }}>
+        <div style={{ height: "auto", width: "100%", direction: "ltr" }}>
             <ReactFlow
                 nodes={nodes}
                 edges={edges}
