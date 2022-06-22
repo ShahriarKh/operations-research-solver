@@ -4,9 +4,13 @@ import ReactFlow, {
     addEdge,
     applyEdgeChanges,
     applyNodeChanges,
+    useNodesState,
+    useEdgesState,
 } from "react-flow-renderer";
+
 import SupplyNode from "../Components/atomes/SupplyNode";
 import DemandNode from "../Components/atomes/DemandNode";
+import CustomEdge from "../Components/atomes/CustomEdge";
 
 const initialNodes = [
     {
@@ -16,7 +20,7 @@ const initialNodes = [
             x: 0,
             y: 0,
         },
-        type: 'supply'
+        type: "supply",
     },
 
     {
@@ -26,7 +30,7 @@ const initialNodes = [
             x: 0,
             y: 100,
         },
-        type: 'supply'
+        type: "supply",
     },
 
     {
@@ -36,7 +40,7 @@ const initialNodes = [
             x: 260,
             y: 0,
         },
-        type: 'demand'
+        type: "demand",
     },
 ];
 
@@ -45,11 +49,15 @@ const initialEdges = [
         id: "s1-d1",
         source: "s1",
         target: "d1",
+        // label: "12",
+        type: "customedge",
     },
     {
         id: "s2-d1",
         source: "s2",
         target: "d1",
+        // label: "45",
+        type: "customedge",
     },
 ];
 
@@ -61,28 +69,33 @@ const graphOptions = {
     snapToGrid: true,
     snapGrid: [60, 60],
     nodesDraggable: false,
+    maxZoom: 1,
 };
 
-
-
 export default function Home() {
-    const [nodes, setNodes] = useState(initialNodes);
-    const [edges, setEdges] = useState(initialEdges);
+    const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+    const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const nodeTypes = useMemo(() => ({ supply: SupplyNode, demand: DemandNode }), []);
-
-    const onNodesChange = useCallback(
-        (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-        [setNodes]
+    const nodeTypes = useMemo(
+        () => ({ supply: SupplyNode, demand: DemandNode }),
+        []
     );
 
-    const onEdgesChange = useCallback(
-        (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-        [setEdges]
-    );
+    const edgeTypes = useMemo(() => ({ customedge: CustomEdge }), []);
+
+    // const onNodesChange = useCallback(
+    //     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    //     [setNodes]
+    // );
+
+    // const onEdgesChange = useCallback(
+    //     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    //     [setEdges]
+    // );
 
     const onConnect = useCallback(
-        (connection) => setEdges((eds) => addEdge(connection, eds)),
+        (connection) =>
+            setEdges((eds) => addEdge({ ...connection, type: "customedge" }, eds)),
         [setEdges]
     );
 
@@ -91,6 +104,7 @@ export default function Home() {
             <div style={{ height: "400px", width: "100%" }}>
                 <ReactFlow
                     nodeTypes={nodeTypes}
+                    edgeTypes={edgeTypes}
                     nodes={nodes}
                     edges={edges}
                     onNodesChange={onNodesChange}
@@ -98,7 +112,6 @@ export default function Home() {
                     onConnect={onConnect}
                     {...graphOptions}
                     fitView
-                    maxZoom={1}
                 >
                     <Background />
                 </ReactFlow>

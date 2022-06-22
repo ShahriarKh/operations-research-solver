@@ -1,0 +1,16 @@
+@use "colors" as *;
+
+.cost {
+    background-color: $grey;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    padding: 2px;
+    text-align: center;
+    width: 100%;
+
+    
+    &:focus {
+        outline: solid 2px $teal;
+    }
+}
