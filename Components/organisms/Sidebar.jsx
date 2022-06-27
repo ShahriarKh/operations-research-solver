@@ -16,10 +16,10 @@ export default function Sidebar(params) {
                 <ul>
                     {pages.map((page) => {
                         return (
-                            <li>
+                            <li key={page.label}>
                                 <NextNavLink href={page.link} activeClassName={css.active}>
                                     <a>
-                                        <i class={`ti ti-${page.icon}`} />
+                                        <i className={`ti ti-${page.icon}`} />
                                         {page.label}
                                     </a>
                                 </NextNavLink>

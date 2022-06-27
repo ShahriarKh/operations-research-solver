@@ -4,6 +4,7 @@ import {
     getEdgeCenter,
     getMarkerEnd,
 } from "react-flow-renderer";
+import { useFormContext } from "react-hook-form";
 
 const foreignObjectSize = 60;
 
@@ -23,6 +24,9 @@ export default function CustomEdge({
     style = {},
     markerEnd,
 }) {
+
+    const { register } = useFormContext();
+
     const edgePath = getBezierPath({
         sourceX,
         sourceY,
@@ -55,9 +59,9 @@ export default function CustomEdge({
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >
-                <body>
-                    <input className={css.cost} />
-                </body>
+                {/* <body> */}
+                    <input className={css.cost} {...register(id)} />
+                {/* </body> */}
             </foreignObject>
         </>
     );
