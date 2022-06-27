@@ -6,7 +6,7 @@ import {
 } from "react-flow-renderer";
 import { useFormContext } from "react-hook-form";
 
-const foreignObjectSize = 60;
+const foreignObjectSize = 40;
 
 function onEdgeClick(e, id) {
     e.stopPropagation();
@@ -55,7 +55,7 @@ export default function CustomEdge({
                 width={foreignObjectSize}
                 height={foreignObjectSize}
                 x={edgeCenterX - foreignObjectSize / 2}
-                y={edgeCenterY - foreignObjectSize / 5}
+                y={edgeCenterY - foreignObjectSize / 3.5}
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >

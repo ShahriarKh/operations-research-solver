@@ -1,0 +1,20 @@
+@use "colors" as *;
+
+.cell {
+    // padding: 8px;
+    // border: solid red 3px;
+    background-color: $grey;
+}
+
+.table {
+    // border: solid 1px green;
+
+    tr {
+        // border: solid 1px yellow;
+        // background-color: red;
+
+        td {
+            padding: 16px;
+        }
+    }
+}
