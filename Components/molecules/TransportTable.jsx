@@ -22,7 +22,7 @@ export default function TransportTable({ supplies, demands, cells }) {
                                     <td className={css.cell}>
                                         0{" "}
                                         <span className={css.cellCost}>
-                                            {watch(`s${i + 1}-d${i + 1}`)}
+                                            {watch(`s${i + 1}-d${j + 1}`)}
                                         </span>
                                     </td>
                                 );

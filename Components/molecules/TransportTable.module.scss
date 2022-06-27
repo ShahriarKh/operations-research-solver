@@ -4,17 +4,31 @@
     // padding: 8px;
     // border: solid red 3px;
     background-color: $grey;
+    position: relative;
+    border-radius: 4px;
 }
 
 .table {
     // border: solid 1px green;
+    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.5);
+    border-radius: 8px;
 
     tr {
         // border: solid 1px yellow;
         // background-color: red;
 
         td {
-            padding: 16px;
+            padding: 12px;
         }
     }
+}
+
+.cellCost {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 2px 4px 8px;
+    border-bottom: solid 2px $grey-dark;
+    border-left: solid 2px $grey-dark;
+    border-bottom-left-radius: 16px;
 }
