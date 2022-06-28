@@ -20,6 +20,9 @@ import DemandNode from "../../Components/atomes/DemandNode";
 import CustomEdge from "../../Components/atomes/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
+import SolveSection from "../../Components/molecules/SolveSection";
+
+import { solveTransportation } from "../../Solver/solveTransportation";
 
 const supplyX = 0;
 const supplyYIncrease = 100;
@@ -211,43 +214,71 @@ export default function Home() {
         );
     }
 
+    const onSubmit = (data) => solveTransportation(data);
+
+    // const onChange = (changes) => {
+    //     const selectionChange = changes.find((change) => change.type === "select");
+    //     if (selectionChange) {
+    //       setEdges((currentEdges) => {
+    //         return currentEdges.map((edge) => {
+    //           if (edge.id === selectionChange.id) return edge;
+    //           return {
+    //             ...edge,
+    //             hidden: selectionChange.selected
+    //           };
+    //         });
+    //       });
+    //     }
+    //     onEdgesChange(changes);
+    //   };
+
     return (
-        <FormProvider {...methods}>
-            <div className={css.page}>
-                <div className={css.graph} style={{}}>
-                    {/* <ReactFlowProvider> */}
-                    <ReactFlow
-                        nodeTypes={nodeTypes}
-                        edgeTypes={edgeTypes}
-                        nodes={nodes}
-                        edges={edges}
-                        onNodesChange={onNodesChange}
-                        onEdgesChange={onEdgesChange}
-                        onConnect={onConnect}
-                        {...graphOptions}
-                        fitView
-                    >
-                        <Background />
-                        <Controls />
-                    </ReactFlow>
-                    {/* </ReactFlowProvider> */}
-                    <div className={css.buttons}>
-                        <button onClick={addSupply}>Add Supply</button>
-                        <button onClick={addDemand}>Add Demand</button>
+        <>
+            <FormProvider {...methods}>
+                <div className={css.page}>
+                    <div className={css.graph} style={{}}>
+                        {/* <ReactFlowProvider> */}
+                        <ReactFlow
+                            nodeTypes={nodeTypes}
+                            edgeTypes={edgeTypes}
+                            nodes={nodes}
+                            edges={edges}
+                            onNodesChange={onNodesChange}
+                            // onEdgesChange={onChange}
+                            onEdgesChange={onEdgesChange}
+                            onConnect={onConnect}
+                            {...graphOptions}
+                            fitView
+                        >
+                            <Background />
+                            <Controls />
+                        </ReactFlow>
+                        {/* </ReactFlowProvider> */}
+                        <div className={css.buttons}>
+                            <button onClick={addSupply}>Add Supply</button>
+                            <button onClick={addDemand}>Add Demand</button>
+                        </div>
+                    </div>
+                    <div className={css.solver}>
+                        <SolveSection title="Table">
+                            <TransportTable
+                                supplies={supplies}
+                                demands={demands}
+                                nodes={nodes}
+                            />
+                        </SolveSection>
+                        <form onSubmit={methods.handleSubmit(onSubmit)}>
+                            <input type="submit" />
+                        </form>
+                        <SolveSection title="Balance check">
+                            {/* {isBalanced(supplies, demands)
+                                ? "Problem is balanced"
+                                : "Problem is not balanced"} */}
+                        </SolveSection>
                     </div>
                 </div>
-                <div className={css.solver}>
-                    {/* <p>{JSON.stringify(edges)}</p> */}
-                    {/* <p>{JSON.stringify(supplies)}</p> */}
-                    <h2>Table</h2>
-                    <TransportTable
-                        supplies={supplies}
-                        demands={demands}
-                        nodes={nodes}
-                    />
-                </div>
-            </div>
-        </FormProvider>
+            </FormProvider>
+        </>
     );
 }
 
@@ -268,34 +299,3 @@ export default function Home() {
 //         damn._data[i][j] = newValue;
 //         console.log(damn._data);
 //     }
-
-//     return (
-//         <table>
-//             <tbody>
-//                 {damn._data.map((row, i = index) => {
-//                     return (
-//                         <tr key={`row ${i}`}>
-//                             {row.map((cell, j = index) => {
-//                                 return (
-//                                     <td key={`cell ${j}`}>
-//                                         <input
-//                                             type="number"
-//                                             min="0"
-//                                             onChange={(e) =>
-//                                                 updateCells(
-//                                                     i,
-//                                                     j,
-//                                                     e.target.value
-//                                                 )
-//                                             }
-//                                         />
-//                                     </td>
-//                                 );
-//                             })}
-//                         </tr>
-//                     );
-//                 })}
-//             </tbody>
-//         </table>
-//     );
-// }

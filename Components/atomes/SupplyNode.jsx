@@ -7,7 +7,7 @@ export default function SupplyNode({ id, data }) {
     // const onChange = useCallback((e) => console.log(e.target.value), []);
 
     const { register } = useFormContext();
-    const { setNodes, getEdges, setEdges } = useReactFlow();
+    const { setNodes } = useReactFlow();
 
     function remove() {
         setNodes((nodes) => nodes.filter((node) => node.id !== id));

@@ -1,0 +1,13 @@
+@use "colors" as *;
+
+.section {
+    margin-top: 48px;
+    width: 100%;
+
+    h2 {
+        color: $teal;
+        font-weight: bold;
+        margin-bottom: 8px;
+        text-align: left;
+    }
+}
