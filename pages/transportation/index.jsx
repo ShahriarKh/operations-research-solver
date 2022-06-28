@@ -22,7 +22,7 @@ import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
 
 const supplyX = 0;
-const supplyYIncrease = 100;
+const supplyYIncrease = 120;
 const demandX = 400;
 const demandYIncrease = 100;
 
@@ -105,7 +105,7 @@ const graphOptions = {
     // zoomOnPinch: false,
     // zoom
     snapToGrid: true,
-    snapGrid: [60, 60],
+    snapGrid: [20, 20],
     // nodesDraggable: false,
     maxZoom: 1,
     panOnScrollMode: "vertical",

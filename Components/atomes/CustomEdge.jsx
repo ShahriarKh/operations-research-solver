@@ -2,16 +2,24 @@ import css from "./CustomEdge.module.scss";
 import {
     getBezierPath,
     getEdgeCenter,
-    getMarkerEnd,
+    getBezierEdgeCenter
+    // getMarkerEnd,
+    // getSmoothStepPath
 } from "react-flow-renderer";
 import { useFormContext } from "react-hook-form";
 
 const foreignObjectSize = 40;
 
-function onEdgeClick(e, id) {
-    e.stopPropagation();
-    alert();
-}
+// function onEdgeClick(e, id) {
+//     e.stopPropagation();
+//     alert();
+// }
+
+
+
+
+
+
 
 export default function CustomEdge({
     id,
@@ -35,12 +43,36 @@ export default function CustomEdge({
         targetY,
         targetPosition,
     });
-    const [edgeCenterX, edgeCenterY] = getEdgeCenter({
+
+
+    // const edgePath = getSmoothStepPath({
+    //     sourceX,
+    //     sourceY,
+    //     // sourcePosition: Position.Bottom, // optional
+    //     targetX,
+    //     targetY,
+    //     // targetPosition = Position.Top, // optional
+    //     borderRadius: 50, // optional
+    //     // centerX, // optional
+    //     // centerY, // optional
+    //   })
+
+    // const [edgeCenterX, edgeCenterY] = getEdgeCenter({
+    //     sourceX,
+    //     sourceY,
+    //     targetX,
+    //     targetY,
+    // });
+
+    const [centerX, centerY, offsetX, offsetY] = getBezierEdgeCenter({
         sourceX,
         sourceY,
+        // sourcePosition: Position.Bottom,
         targetX,
         targetY,
-    });
+        // targetPosition: Position.Top,
+        curvature: 0.75,
+      })
 
     return (
         <>
@@ -54,8 +86,8 @@ export default function CustomEdge({
             <foreignObject
                 width={foreignObjectSize}
                 height={foreignObjectSize}
-                x={edgeCenterX - foreignObjectSize / 2}
-                y={edgeCenterY - foreignObjectSize / 3.5}
+                x={centerX - foreignObjectSize / 2}
+                y={centerY - foreignObjectSize / 3.5}
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >
