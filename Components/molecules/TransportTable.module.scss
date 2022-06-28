@@ -5,17 +5,41 @@
     // border: solid red 3px;
     background-color: $grey;
     position: relative;
-    border-radius: 4px;
+    // border-radius: 4px;
 }
+
+$round: 8px;
 
 .table {
     // border: solid 1px green;
-    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 12px 1px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
 
     tr {
         // border: solid 1px yellow;
         // background-color: red;
+
+        &:nth-child(2) {
+            td {
+                &:nth-child(2) {
+                    border-top-left-radius: $round;
+                }
+                &:nth-last-child(2) {
+                    border-top-right-radius: $round;
+                }
+            }
+        }
+
+        &:nth-last-child(2) {
+            td {
+                &:nth-child(2) {
+                    border-bottom-left-radius: $round;
+                }
+                &:nth-last-child(2) {
+                    border-bottom-right-radius: $round;
+                }
+            }
+        }
 
         td {
             padding: 12px;
@@ -27,8 +51,11 @@
     position: absolute;
     top: 0;
     right: 0;
-    padding: 2px 2px 4px 8px;
+    padding: 4px 4px 4px 8px;
     border-bottom: solid 2px $grey-dark;
     border-left: solid 2px $grey-dark;
     border-bottom-left-radius: 16px;
+
+    font-size: 12px;
+    color: $teal;
 }
