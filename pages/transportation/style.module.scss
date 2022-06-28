@@ -1,0 +1,16 @@
+@use "colors" as *;
+
+.solver {
+    margin: 16px 10%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+        color: $teal;
+    font-weight: bold;    
+margin-bottom: 24px;}
+}
+

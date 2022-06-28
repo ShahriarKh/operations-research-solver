@@ -17,6 +17,7 @@ import SupplyNode from "../../Components/atomes/SupplyNode";
 import DemandNode from "../../Components/atomes/DemandNode";
 import CustomEdge from "../../Components/atomes/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
+import css from "./style.module.scss"
 
 const initialNodes = [
     {
@@ -80,7 +81,7 @@ const graphOptions = {
 
 export default function Home() {
     const methods = useForm();
-    const onSumbit = data => alert(data)
+    const onSumbit = (data) => alert(data);
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -117,7 +118,10 @@ export default function Home() {
                     <Background />
                 </ReactFlow>
             </div>
-            <TransportTable supplies={["s1", "s2"]} demands={["d1"]} />
+            <div className={css.solver}>
+                <h2>Table Form</h2>
+                <TransportTable supplies={["s1", "s2"]} demands={["d1"]} />
+            </div>
         </FormProvider>
     );
 }

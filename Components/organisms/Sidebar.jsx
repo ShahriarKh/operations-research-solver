@@ -17,7 +17,10 @@ export default function Sidebar(params) {
                     {pages.map((page) => {
                         return (
                             <li key={page.label}>
-                                <NextNavLink href={page.link} activeClassName={css.active}>
+                                <NextNavLink
+                                    href={page.link}
+                                    activeClassName={css.active}
+                                >
                                     <a>
                                         <i className={`ti ti-${page.icon}`} />
                                         {page.label}
@@ -28,6 +31,13 @@ export default function Sidebar(params) {
                     })}
                 </ul>
             </nav>
+
+            <div className={css.info}>
+                <a href="https://github.com/shahriarkh" className={css.link}>
+                    <i className="ti ti-brand-github" />
+                    By: Shahriar Khalvati
+                </a>
+            </div>
         </div>
     );
 }

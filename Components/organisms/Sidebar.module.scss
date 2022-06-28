@@ -14,7 +14,13 @@
     background-color: $grey-dark;
     box-shadow: -2px 0 18px rgb(0, 0, 0, 0.5);
     color: white;
-    padding: 24px 16px;
+    
+    display: flex;
+    flex-direction: column;
+
+    nav {
+        padding: 24px 16px;
+    }
 
     li {
         a {
@@ -35,5 +41,33 @@
 
     ul {
         list-style-type: none;
+    }
+}
+
+
+.info {
+    margin-top: auto;
+    background-color: $grey;
+    padding: 8px 16px;
+}
+
+.link {
+    display: flex;
+    gap: 6px;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 0.2s;
+    font-size: 12px;
+    opacity: 0.5;
+
+    &:hover {
+        color: $teal;
+        opacity: 1;
+    }
+
+    i {
+        background-color: $grey-dark;
+        padding: 4px;
+        border-radius: 50%;
     }
 }

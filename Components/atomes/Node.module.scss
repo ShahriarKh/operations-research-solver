@@ -9,9 +9,12 @@
     color: white;
     width: 100px;
     text-align: center;
+    border: solid 2px transparent;
+    transition: all 0.2s;
 
     &:focus {
-        outline: solid 2px $teal;
+        border: solid 2px $teal;
+        outline: none;
     }
 }
 
@@ -25,6 +28,7 @@
     flex-direction: column;
     gap: 8px;
     background-color: $grey-dark;
+
 
     p   {
         font-size: 14px;
