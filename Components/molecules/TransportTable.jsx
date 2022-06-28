@@ -1,7 +1,7 @@
 import css from "./TransportTable.module.scss";
 import { useFormContext } from "react-hook-form";
 
-export default function TransportTable({ supplies, demands, cells }) {
+export default function TransportTable({ demands, supplies }) {
     const { watch } = useFormContext();
 
     return (
@@ -9,39 +9,39 @@ export default function TransportTable({ supplies, demands, cells }) {
             <tbody>
                 <tr key={"demands"}>
                     <td></td>
-                    {demands.map((demand, i) => {
+                    {demands.map((demand) => {
                         return (
-                            <td key={`demand label ${i}`}>Demand {i + 1}</td>
+                            <td key={demand.data.label}>{demand.data.label}</td>
                         );
                     })}
                 </tr>
 
-                {supplies.map((supply, i) => {
+                {supplies.map((supply) => {
                     return (
-                        <tr key={`row ${i}`}>
-                            <td key={`supply label ${i}`}>Supply {i + 1}</td>
-                            {demands.map((demands, j) => {
+                        <tr key={`row ${supply.id}`}>
+                            <td key={supply.data.label}>{supply.data.label}</td>
+                            {demands.map((demand) => {
                                 return (
                                     <td
-                                        key={`cell ${i},${j}`}
+                                        key={`cell ${supply.id},${demand.id}`}
                                         className={css.cell}
                                     >
                                         0{" "}
                                         <span className={css.cellCost}>
-                                            {watch(`s${i + 1}-d${j + 1}`)}
+                                            {watch(`${supply.id}-${demand.id}`)}
                                         </span>
                                     </td>
                                 );
                             })}
-                            <td key={`supply ${i}`}>{watch(supply)}</td>
+                            <td key={supply.id}>{watch(supply.id)}</td>
                         </tr>
                     );
                 })}
 
                 <tr>
                     <td></td>
-                    {demands.map((demand, j) => {
-                        return <td key={`demand ${j}`}>{watch(demand)}</td>;
+                    {demands.map((demand) => {
+                        return <td key={demand.id}>{watch(demand.id)}</td>;
                     })}
                 </tr>
             </tbody>

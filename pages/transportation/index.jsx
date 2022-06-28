@@ -22,7 +22,7 @@ import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
 
 const supplyX = 0;
-const supplyYIncrease = 120;
+const supplyYIncrease = 100;
 const demandX = 400;
 const demandYIncrease = 100;
 
@@ -73,29 +73,29 @@ const initialEdges = [
         id: "s1-d1",
         source: "s1",
         target: "d1",
-        // label: "12",
         type: "customedge",
+        hidden: false,
     },
     {
         id: "s2-d1",
         source: "s2",
         target: "d1",
-        // label: "45",
         type: "customedge",
+        hidden: false,
     },
     {
         id: "s1-d2",
         source: "s1",
         target: "d2",
-        // label: "12",
         type: "customedge",
+        hidden: false,
     },
     {
         id: "s2-d2",
         source: "s2",
         target: "d2",
-        // label: "45",
         type: "customedge",
+        hidden: false,
     },
 ];
 
@@ -104,8 +104,8 @@ const graphOptions = {
     // zoomOnScroll: false,
     // zoomOnPinch: false,
     // zoom
-    snapToGrid: true,
-    snapGrid: [20, 20],
+    // snapToGrid: true,
+    // snapGrid: [20, 20],
     // nodesDraggable: false,
     maxZoom: 1,
     panOnScrollMode: "vertical",
@@ -117,8 +117,11 @@ export default function Home() {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
-    const [supplies, setSupplies] = useState(["s1", "s2"]);
-    const [demands, setDemands] = useState(["d1", "d2"]);
+    const supplies = nodes.filter((node) => node.id.charAt(0) == "s");
+    const demands = nodes.filter((node) => node.id.charAt(0) == "d");
+
+    const [lastSupply, setLastSupply] = useState(supplies.length);
+    const [lastDemand, setLastDemand] = useState(demands.length);
 
     const nodeTypes = useMemo(
         () => ({ supply: SupplyNode, demand: DemandNode }),
@@ -135,6 +138,7 @@ export default function Home() {
                         ...connection,
                         type: "customedge",
                         id: `${connection.source}-${connection.target}`,
+                        hidden: false,
                     },
                     edges
                 )
@@ -143,8 +147,8 @@ export default function Home() {
     );
 
     function addSupply() {
-        const y = supplies.length * supplyYIncrease;
-        let supplyNumber = supplies.length + 1;
+        const y = lastSupply * supplyYIncrease;
+        let supplyNumber = lastSupply + 1;
 
         const newSupply = {
             id: `s${supplyNumber}`,
@@ -156,7 +160,7 @@ export default function Home() {
             data: { label: `Supply ${supplyNumber}` },
         };
 
-        setSupplies((supplies) => supplies.concat(`s${supplyNumber}`));
+        setLastSupply(supplyNumber);
         setNodes((nodes) => nodes.concat(newSupply));
 
         demands.forEach((demand) =>
@@ -165,8 +169,9 @@ export default function Home() {
                     {
                         type: "customedge",
                         source: `s${supplyNumber}`,
-                        target: demand,
-                        id: `s${supplyNumber}-${demand}`,
+                        target: demand.id,
+                        id: `s${supplyNumber}-${demand.id}`,
+                        hidden: false,
                     },
                     edges
                 )
@@ -175,8 +180,8 @@ export default function Home() {
     }
 
     function addDemand() {
-        const y = demands.length * demandYIncrease;
-        let demandNumber = demands.length + 1;
+        const y = lastDemand * demandYIncrease;
+        let demandNumber = lastDemand + 1;
 
         const newDemand = {
             id: `d${demandNumber}`,
@@ -187,7 +192,7 @@ export default function Home() {
             },
             data: { label: `Demand ${demandNumber}` },
         };
-        setDemands((demands) => demands.concat(`d${demandNumber}`));
+        setLastDemand(demandNumber);
         setNodes((nodes) => nodes.concat(newDemand));
 
         supplies.forEach((supply) =>
@@ -195,9 +200,10 @@ export default function Home() {
                 addEdge(
                     {
                         type: "customedge",
-                        source: supply,
+                        source: supply.id,
                         target: `d${demandNumber}`,
-                        id: `${supply}-d${demandNumber}`,
+                        id: `${supply.id}-d${demandNumber}`,
+                        hidden: false,
                     },
                     edges
                 )
@@ -231,10 +237,14 @@ export default function Home() {
                     </div>
                 </div>
                 <div className={css.solver}>
-                    {/* <p>{JSON.stringify(demands)}</p> */}
+                    {/* <p>{JSON.stringify(edges)}</p> */}
                     {/* <p>{JSON.stringify(supplies)}</p> */}
                     <h2>Table</h2>
-                    <TransportTable supplies={supplies} demands={demands} />
+                    <TransportTable
+                        supplies={supplies}
+                        demands={demands}
+                        nodes={nodes}
+                    />
                 </div>
             </div>
         </FormProvider>
