@@ -18,6 +18,8 @@
     }
 }
 
+/* Chrome, Safari, Edge, Opera */
+
 .header {
     display: flex;
     justify-content: space-between;
@@ -43,7 +45,7 @@
     // background-color: $grey;
     padding: 12px;
     // border: solid 1px white;
-    box-shadow: 0 2px 12px 1px rgba(0,0,0,0.5);
+    box-shadow: 0 2px 12px 1px rgba(0, 0, 0, 0.5);
     border-radius: 8px;
     display: flex;
     flex-direction: column;

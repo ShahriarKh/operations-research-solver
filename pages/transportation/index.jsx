@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, createElement } from "react";
 import ReactFlow, {
     Background,
     Controls,
@@ -115,7 +115,10 @@ const graphOptions = {
 };
 
 export default function Home() {
-    const methods = useForm();
+    const methods = useForm({
+        mode: "onSubmit",
+        reValidateMode: "onSubmit"
+    });
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
@@ -214,7 +217,12 @@ export default function Home() {
         );
     }
 
-    const onSubmit = (data) => solveTransportation(data);
+    const [steps, setSteps] = useState([]);
+
+    const onSubmit = (data) => {
+        setSteps([]);
+        solveTransportation(data, steps, setSteps);
+    };
 
     // const onChange = (changes) => {
     //     const selectionChange = changes.find((change) => change.type === "select");
@@ -270,11 +278,10 @@ export default function Home() {
                         <form onSubmit={methods.handleSubmit(onSubmit)}>
                             <input type="submit" />
                         </form>
-                        <SolveSection title="Balance check">
-                            {/* {isBalanced(supplies, demands)
-                                ? "Problem is balanced"
-                                : "Problem is not balanced"} */}
-                        </SolveSection>
+
+                        {steps}
+
+                        {console.log("steps" + steps)}
                     </div>
                 </div>
             </FormProvider>

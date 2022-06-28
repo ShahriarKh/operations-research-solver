@@ -42,6 +42,8 @@ export default function SupplyNode({ id, data }) {
                     className={css.input}
                     {...register(id)}
                     defaultValue={0}
+                    type="number"
+                    min={0}
                 />
 
                 {/* <p>{JSON.stringify(getEdges())}</p> */}

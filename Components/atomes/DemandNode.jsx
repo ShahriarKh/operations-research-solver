@@ -28,6 +28,9 @@ export default function DemandNode({ id, data }) {
                     className={css.input}
                     {...register(id)}
                     defaultValue={0}
+                    type="number"
+                    min={0}
+                    // inputmode="numeric" pattern="\d*"
                 />
             </div>
             <Handle type="target" position={Position.Left} />
