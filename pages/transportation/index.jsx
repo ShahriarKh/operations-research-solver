@@ -28,6 +28,7 @@ const supplyX = 0;
 const supplyYIncrease = 100;
 const demandX = 400;
 const demandYIncrease = 100;
+const demandXIncrease = 100;
 
 const initialNodes = [
     {
@@ -64,7 +65,7 @@ const initialNodes = [
         id: "d2",
         data: { label: "Demand 2" },
         position: {
-            x: demandX,
+            x: demandX + demandXIncrease,
             y: demandYIncrease,
         },
         type: "demand",
@@ -178,6 +179,7 @@ export default function Home() {
                         target: demand.id,
                         id: `s${supplyNumber}-${demand.id}`,
                         hidden: false,
+                        zIndex: 0
                     },
                     edges
                 )
@@ -187,13 +189,14 @@ export default function Home() {
 
     function addDemand() {
         const y = lastDemand * demandYIncrease;
+        const x = lastDemand * demandXIncrease + demandX;
         let demandNumber = lastDemand + 1;
 
         const newDemand = {
             id: `d${demandNumber}`,
             type: "demand",
             position: {
-                x: demandX,
+                x: x,
                 y: y,
             },
             data: { label: `Demand ${demandNumber}` },
@@ -210,6 +213,7 @@ export default function Home() {
                         target: `d${demandNumber}`,
                         id: `${supply.id}-d${demandNumber}`,
                         hidden: false,
+                        zIndex: 0
                     },
                     edges
                 )
@@ -224,21 +228,21 @@ export default function Home() {
         solveTransportation(data, steps, setSteps);
     };
 
-    // const onChange = (changes) => {
-    //     const selectionChange = changes.find((change) => change.type === "select");
-    //     if (selectionChange) {
-    //       setEdges((currentEdges) => {
-    //         return currentEdges.map((edge) => {
-    //           if (edge.id === selectionChange.id) return edge;
-    //           return {
-    //             ...edge,
-    //             hidden: selectionChange.selected
-    //           };
-    //         });
-    //       });
-    //     }
-    //     onEdgesChange(changes);
-    //   };
+    const onChange = (changes) => {
+        const selectionChange = changes.find((change) => change.type === "select");
+        if (selectionChange) {
+          setEdges((currentEdges) => {
+            return currentEdges.map((edge) => {
+              if (edge.id === selectionChange.id) return edge;
+              return {
+                ...edge,
+                hidden: selectionChange.selected
+              };
+            });
+          });
+        }
+        onEdgesChange(changes);
+      };
 
     return (
         <>
@@ -252,8 +256,8 @@ export default function Home() {
                             nodes={nodes}
                             edges={edges}
                             onNodesChange={onNodesChange}
-                            // onEdgesChange={onChange}
-                            onEdgesChange={onEdgesChange}
+                            onEdgesChange={onChange}
+                            // onEdgesChange={onEdgesChange}
                             onConnect={onConnect}
                             {...graphOptions}
                             fitView

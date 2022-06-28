@@ -1,14 +1,8 @@
 import css from "./CustomEdge.module.scss";
 import { getBezierPath, getBezierEdgeCenter } from "react-flow-renderer";
 import { useFormContext } from "react-hook-form";
-// import { createRef, useEffect, useState } from "react";
 
 const foreignObjectSize = 40;
-
-// function onEdgeClick(e, id) {
-//     // e.stopPropagation();
-// }
-
 
 export default function CustomEdge({
     id,
@@ -40,12 +34,6 @@ export default function CustomEdge({
         curvature: 0.25,
     });
 
-    // const ref = createRef();
-    // const [coords, setCoords] = useState({ x: 0, y: 0 });
-
-    // useEffect(() => {
-    //     setCoords(ref.current.getPointAtLength(150));
-    // }, [sourceX, sourceY, targetX, targetY]);
 
     return (
         <>
@@ -70,3 +58,16 @@ export default function CustomEdge({
         </>
     );
 }
+
+
+// function onEdgeClick(e, id) {
+//     // e.stopPropagation();
+// }
+
+
+    // const ref = createRef();
+    // const [coords, setCoords] = useState({ x: 0, y: 0 });
+
+    // useEffect(() => {
+    //     setCoords(ref.current.getPointAtLength(150));
+    // }, [sourceX, sourceY, targetX, targetY]);
