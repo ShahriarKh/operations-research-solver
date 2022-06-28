@@ -24,7 +24,7 @@ import css from "./style.module.scss";
 const supplyX = 0;
 const supplyYIncrease = 100;
 const demandX = 400;
-const demandYIncrease = 180;
+const demandYIncrease = 100;
 
 const initialNodes = [
     {
@@ -195,8 +195,8 @@ export default function Home() {
                 addEdge(
                     {
                         type: "customedge",
-                        source: `s${demandNumber}`,
-                        target: supply,
+                        source: supply,
+                        target: `d${demandNumber}`,
                         id: `${supply}-d${demandNumber}`,
                     },
                     edges
