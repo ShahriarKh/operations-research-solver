@@ -1,19 +1,19 @@
-import { useState, useCallback, useMemo, useRef } from "react";
+import { useState, useCallback, useMemo } from "react";
 import ReactFlow, {
     Background,
     Controls,
     addEdge,
-    applyEdgeChanges,
-    applyNodeChanges,
+    // applyEdgeChanges,
+    // applyNodeChanges,
     useNodesState,
     useEdgesState,
-    ReactFlowProvider,
+    // ReactFlowProvider,
 } from "react-flow-renderer";
 import {
     useForm,
     FormProvider,
-    useFormContext,
-    useWatch,
+    // useFormContext,
+    // useWatch,
 } from "react-hook-form";
 import SupplyNode from "../../Components/atomes/SupplyNode";
 import DemandNode from "../../Components/atomes/DemandNode";
@@ -21,10 +21,10 @@ import CustomEdge from "../../Components/atomes/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
 
-const supplyX = 0
-const supplyYIncrease = 100
-const demandX = 400
-const demandYIncrease = 180
+const supplyX = 0;
+const supplyYIncrease = 100;
+const demandX = 400;
+const demandYIncrease = 180;
 
 const initialNodes = [
     {
@@ -127,20 +127,20 @@ export default function Home() {
 
     const edgeTypes = useMemo(() => ({ customedge: CustomEdge }), []);
 
-    const onConnect = useCallback((connection) => {
-        console.log(connection);
-        setEdges((edges) =>
-            addEdge(
-                {
-                    ...connection,
-                    type: "customedge",
-                    id: `${connection.source}-${connection.target}`,
-                },
-                edges
-            )
-        ),
-            [setEdges];
-    });
+    const onConnect = useCallback(
+        (connection) =>
+            setEdges((edges) =>
+                addEdge(
+                    {
+                        ...connection,
+                        type: "customedge",
+                        id: `${connection.source}-${connection.target}`,
+                    },
+                    edges
+                )
+            ),
+        [setEdges]
+    );
 
     function addSupply() {
         const y = supplies.length * supplyYIncrease;
@@ -155,8 +155,23 @@ export default function Home() {
             },
             data: { label: `Supply ${supplyNumber}` },
         };
+
         setSupplies((supplies) => supplies.concat(`s${supplyNumber}`));
         setNodes((nodes) => nodes.concat(newSupply));
+
+        demands.forEach((demand) =>
+            setEdges((edges) =>
+                addEdge(
+                    {
+                        type: "customedge",
+                        source: `s${supplyNumber}`,
+                        target: demand,
+                        id: `s${supplyNumber}-${demand}`,
+                    },
+                    edges
+                )
+            )
+        );
     }
 
     function addDemand() {
@@ -174,6 +189,20 @@ export default function Home() {
         };
         setDemands((demands) => demands.concat(`d${demandNumber}`));
         setNodes((nodes) => nodes.concat(newDemand));
+
+        supplies.forEach((supply) =>
+            setEdges((edges) =>
+                addEdge(
+                    {
+                        type: "customedge",
+                        source: `s${demandNumber}`,
+                        target: supply,
+                        id: `${supply}-d${demandNumber}`,
+                    },
+                    edges
+                )
+            )
+        );
     }
 
     return (
@@ -181,20 +210,20 @@ export default function Home() {
             <div className={css.page}>
                 <div className={css.graph} style={{}}>
                     {/* <ReactFlowProvider> */}
-                        <ReactFlow
-                            nodeTypes={nodeTypes}
-                            edgeTypes={edgeTypes}
-                            nodes={nodes}
-                            edges={edges}
-                            onNodesChange={onNodesChange}
-                            onEdgesChange={onEdgesChange}
-                            onConnect={onConnect}
-                            {...graphOptions}
-                            fitView
-                        >
-                            <Background />
-                            <Controls />
-                        </ReactFlow>
+                    <ReactFlow
+                        nodeTypes={nodeTypes}
+                        edgeTypes={edgeTypes}
+                        nodes={nodes}
+                        edges={edges}
+                        onNodesChange={onNodesChange}
+                        onEdgesChange={onEdgesChange}
+                        onConnect={onConnect}
+                        {...graphOptions}
+                        fitView
+                    >
+                        <Background />
+                        <Controls />
+                    </ReactFlow>
                     {/* </ReactFlowProvider> */}
                     <div className={css.buttons}>
                         <button onClick={addSupply}>Add Supply</button>

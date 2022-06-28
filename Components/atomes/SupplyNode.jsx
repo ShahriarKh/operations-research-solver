@@ -4,14 +4,12 @@ import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function SupplyNode({ id, data }) {
-    const onChange = useCallback((e) => console.log(e.target.value), []);
+    // const onChange = useCallback((e) => console.log(e.target.value), []);
 
     const { register } = useFormContext();
-    const { getNodes, setNodes } = useReactFlow();
+    const { setNodes } = useReactFlow();
 
     function remove() {
-        const nodes = getNodes();
-        // console.log(nodes);
         setNodes((nodes) => nodes.filter((node) => node.id !== id));
     }
 
@@ -26,7 +24,7 @@ export default function SupplyNode({ id, data }) {
                 </div>
 
                 <input
-                    onChange={onChange}
+                    // onChange={onChange}
                     className={css.input}
                     {...register(id)}
                     defaultValue={0}

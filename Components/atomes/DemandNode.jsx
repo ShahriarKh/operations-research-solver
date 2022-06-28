@@ -4,7 +4,7 @@ import { useCallback } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function DemandNode({ id, data }) {
-    const onChange = useCallback((e) => console.log(e.target.value), []);
+    // const onChange = useCallback((e) => console.log(e.target.value), []);
 
     const { register } = useFormContext();
     const { setNodes } = useReactFlow();
@@ -24,7 +24,7 @@ export default function DemandNode({ id, data }) {
                 </div>
 
                 <input
-                    onChange={onChange}
+                    // onChange={onChange}
                     className={css.input}
                     {...register(id)}
                     defaultValue={0}
