@@ -18,6 +18,27 @@
     }
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.remove {
+    outline: none;
+    border: none;
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    opacity: 0;
+
+    &:hover {
+        color: $red;
+    }
+}
+
 .box {
     // background-color: $grey;
     padding: 12px;
@@ -29,8 +50,13 @@
     gap: 8px;
     background-color: $grey-dark;
 
-
-    p   {
+    p {
         font-size: 14px;
+    }
+
+    &:hover {
+        .remove {
+            opacity: 1;
+        }
     }
 }

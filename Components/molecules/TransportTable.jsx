@@ -7,19 +7,25 @@ export default function TransportTable({ supplies, demands, cells }) {
     return (
         <table className={css.table}>
             <tbody>
-                <tr>
+                <tr key={"demands"}>
                     <td></td>
                     {demands.map((demand, i) => {
-                        return <td>Demand {i + 1}</td>;
+                        return (
+                            <td key={`demand label ${i}`}>Demand {i + 1}</td>
+                        );
                     })}
                 </tr>
+
                 {supplies.map((supply, i) => {
                     return (
-                        <tr>
-                            <td>Supply {i + 1}</td>
+                        <tr key={`row ${i}`}>
+                            <td key={`supply label ${i}`}>Supply {i + 1}</td>
                             {demands.map((demands, j) => {
                                 return (
-                                    <td className={css.cell}>
+                                    <td
+                                        key={`cell ${i},${j}`}
+                                        className={css.cell}
+                                    >
                                         0{" "}
                                         <span className={css.cellCost}>
                                             {watch(`s${i + 1}-d${j + 1}`)}
@@ -27,14 +33,15 @@ export default function TransportTable({ supplies, demands, cells }) {
                                     </td>
                                 );
                             })}
-                            <td>{watch(supply)}</td>
+                            <td key={`supply ${i}`}>{watch(supply)}</td>
                         </tr>
                     );
                 })}
+
                 <tr>
                     <td></td>
-                    {demands.map((demand) => {
-                        return <td>{watch(demand)}</td>;
+                    {demands.map((demand, j) => {
+                        return <td key={`demand ${j}`}>{watch(demand)}</td>;
                     })}
                 </tr>
             </tbody>
