@@ -1,5 +1,5 @@
 import { checkBalance } from "./Transportation/checkBalance";
-import { createMatrix } from "./Transportation/createMatrix";
+import { createCostMatrix, createMatrix } from "./Transportation/createMatrix";
 
 export function solveTransportation(data, steps, setSteps) {
     // ========================================
@@ -8,6 +8,7 @@ export function solveTransportation(data, steps, setSteps) {
 
     const supplyRegex = /^s\d*$/;
     const demandRegex = /^d\d*$/;
+    const costRegex   = /^s.*d\d*$/;
 
     const supplies = Object.fromEntries(
         Object.entries(data).filter(([key]) => supplyRegex.test(key))
@@ -17,17 +18,27 @@ export function solveTransportation(data, steps, setSteps) {
         Object.entries(data).filter(([key]) => demandRegex.test(key))
     );
 
+    const costs = Object.fromEntries(
+        Object.entries(data).filter(([key]) => costRegex.test(key))
+    );
+
+    const suppliesCount = Object.keys(supplies).length;
+    const demandsCount = Object.keys(demands).length;
+
     // ========================================
     // Check Problem Balance
     // ========================================
 
-    const stepBalanceComponent = checkBalance(supplies, demands);
-    setSteps((steps) => [...steps, stepBalanceComponent]);
+    const balanceStep = checkBalance(supplies, demands);
+    setSteps((steps) => [...steps, balanceStep]);
 
     // ========================================
     // Create Matrix
     // ========================================
 
-    const stepMatrixComponent = createMatrix(supplies, demands);
-    setSteps((steps) => [...steps, stepMatrixComponent]);
+    const { matrix, matrixStep } = createMatrix(suppliesCount, demandsCount);
+    setSteps((steps) => [...steps, matrixStep]);
+
+    const { costMatrix, costMatrixStep } = createCostMatrix(costs, suppliesCount, demandsCount)
+    setSteps((steps) => [...steps, costMatrixStep]);
 }
