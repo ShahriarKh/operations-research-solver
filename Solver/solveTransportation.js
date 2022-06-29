@@ -1,4 +1,5 @@
 import { checkBalance } from "./Transportation/checkBalance";
+import { createMatrix } from "./Transportation/createMatrix";
 
 export function solveTransportation(data, steps, setSteps) {
     // ========================================
@@ -20,8 +21,13 @@ export function solveTransportation(data, steps, setSteps) {
     // Check Problem Balance
     // ========================================
 
-     const stepBalanceComponent = checkBalance(supplies, demands);
-     setSteps((steps) => [...steps, stepBalanceComponent]);
+    const stepBalanceComponent = checkBalance(supplies, demands);
+    setSteps((steps) => [...steps, stepBalanceComponent]);
 
-    
+    // ========================================
+    // Create Matrix
+    // ========================================
+
+    const stepMatrixComponent = createMatrix(supplies, demands);
+    setSteps((steps) => [...steps, stepMatrixComponent]);
 }

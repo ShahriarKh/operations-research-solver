@@ -1,16 +1,20 @@
 import css from "./Node.module.scss";
 import { Handle, Position, useReactFlow } from "react-flow-renderer";
-import { useCallback } from "react";
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
 export default function DemandNode({ id, data }) {
-    // const onChange = useCallback((e) => console.log(e.target.value), []);
-
-    const { register } = useFormContext();
+    const { register, unregister } = useFormContext();
     const { setNodes } = useReactFlow();
+
+    // This is required, so the unregistered input doesn't get registered again
+    // https://react-hook-form.com/api/useform/unregister
+    const [inputRegistered, setInputRegistered] = useState(true);
 
     function remove() {
         setNodes((nodes) => nodes.filter((node) => node.id !== id));
+        unregister(id);
+        setInputRegistered(false)
     }
 
     return (
@@ -23,15 +27,17 @@ export default function DemandNode({ id, data }) {
                     </button>
                 </div>
 
-                <input
-                    // onChange={onChange}
-                    className={css.input}
-                    {...register(id)}
-                    defaultValue={0}
-                    type="number"
-                    min={0}
-                    // inputmode="numeric" pattern="\d*"
-                />
+                {inputRegistered && (
+                    <input
+                        // onChange={onChange}
+                        className={css.input}
+                        {...register(id)}
+                        defaultValue={0}
+                        type="number"
+                        min={0}
+                        // inputmode="numeric" pattern="\d*"
+                    />
+                )}
             </div>
             <Handle type="target" position={Position.Left} />
         </>

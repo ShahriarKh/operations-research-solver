@@ -118,7 +118,7 @@ const graphOptions = {
 export default function Home() {
     const methods = useForm({
         mode: "onSubmit",
-        reValidateMode: "onSubmit"
+        reValidateMode: "onSubmit",
     });
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -179,7 +179,6 @@ export default function Home() {
                         target: demand.id,
                         id: `s${supplyNumber}-${demand.id}`,
                         hidden: false,
-                        zIndex: 0
                     },
                     edges
                 )
@@ -213,7 +212,6 @@ export default function Home() {
                         target: `d${demandNumber}`,
                         id: `${supply.id}-d${demandNumber}`,
                         hidden: false,
-                        zIndex: 0
                     },
                     edges
                 )
@@ -229,20 +227,22 @@ export default function Home() {
     };
 
     const onChange = (changes) => {
-        const selectionChange = changes.find((change) => change.type === "select");
+        const selectionChange = changes.find(
+            (change) => change.type === "select"
+        );
         if (selectionChange) {
-          setEdges((currentEdges) => {
-            return currentEdges.map((edge) => {
-              if (edge.id === selectionChange.id) return edge;
-              return {
-                ...edge,
-                hidden: selectionChange.selected
-              };
+            setEdges((currentEdges) => {
+                return currentEdges.map((edge) => {
+                    if (edge.id === selectionChange.id) return edge;
+                    return {
+                        ...edge,
+                        hidden: selectionChange.selected,
+                    };
+                });
             });
-          });
         }
         onEdgesChange(changes);
-      };
+    };
 
     return (
         <>
@@ -282,10 +282,7 @@ export default function Home() {
                         <form onSubmit={methods.handleSubmit(onSubmit)}>
                             <input type="submit" />
                         </form>
-
                         {steps}
-
-                        {console.log("steps" + steps)}
                     </div>
                 </div>
             </FormProvider>

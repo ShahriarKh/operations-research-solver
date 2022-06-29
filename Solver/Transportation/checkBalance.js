@@ -13,18 +13,23 @@ export function checkBalance(supplies, demands) {
     const supplyMinusDemand = suppliesSum - demandsSum;
 
     if (supplyMinusDemand === 0) {
-        component = <div>Problem is Balanced.</div>;
+        component = <div>Supply = Demand = {suppliesSum}, Problem is Balanced.</div>;
     } else {
         component = (
             <div>
-                Problem is not balanced. <br />
-                Demand: {demandsSum}, Supply: {suppliesSum} <br />
-                You need to add a dummy{" "}
-                {supplyMinusDemand > 0 ? "Demand" : "Supply"} node with value of{" "}
-                {Math.abs(supplyMinusDemand)}
+                Problem is{" "}
+                <span style={{ color: "#ff595ff0" }}>not balanced</span>.<br />
+                Supply: {suppliesSum} <br />
+                Demand: {demandsSum} <br />
+                Difference: {Math.abs(supplyMinusDemand)}
+                {/* You need to add a dummy{" "} */}
+                {/* {supplyMinusDemand > 0 ? "Demand" : "Supply"} node with value of{" "} */}
+                {/* {Math.abs(supplyMinusDemand)} */}
             </div>
         );
     }
 
-    return <SolveSection title={"Step 1: Problem Balance"}>{component}</SolveSection>;
+    return (
+        <SolveSection title={"Step 1: Check Balance"}>{component}</SolveSection>
+    );
 }
