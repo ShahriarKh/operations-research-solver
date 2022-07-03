@@ -40,7 +40,7 @@ export function solveTransportation(data, steps, setSteps, supplyNodes, demandNo
     // ========================================
 
     const { matrix, matrixStep } = createMatrix(suppliesCount, demandsCount);
-    setSteps((steps) => [...steps, matrixStep]);
+    // setSteps((steps) => [...steps, matrixStep]);
 
     const { costMatrix, costMatrixStep } = createCostMatrix(
         costs,
