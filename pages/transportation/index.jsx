@@ -15,9 +15,9 @@ import {
     // useFormContext,
     // useWatch,
 } from "react-hook-form";
-import SupplyNode from "../../Components/atomes/SupplyNode";
-import DemandNode from "../../Components/atomes/DemandNode";
-import CustomEdge from "../../Components/atomes/CustomEdge";
+import SupplyNode from "../../Components/atoms/SupplyNode";
+import DemandNode from "../../Components/atoms/DemandNode";
+import CustomEdge from "../../Components/atoms/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
 import SolveSection from "../../Components/molecules/SolveSection";

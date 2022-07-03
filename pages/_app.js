@@ -1,4 +1,4 @@
-import AppLayout from "../Components/Layouts/AppLayout";
+import AppLayout from "../Components/layouts/AppLayout";
 import Sidebar from "../Components/organisms/Sidebar";
 import "../styles/globals.scss";
 
