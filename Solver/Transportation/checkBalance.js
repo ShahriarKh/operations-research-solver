@@ -30,6 +30,6 @@ export function checkBalance(supplies, demands) {
     }
 
     return (
-        <SolveSection key="step1" title={"Step 1: Check Balance"}>{component}</SolveSection>
+        <SolveSection key="step1" title={"Step 0: Check Balance"}>{component}</SolveSection>
     );
 }

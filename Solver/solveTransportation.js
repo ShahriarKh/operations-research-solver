@@ -1,11 +1,13 @@
 import { checkBalance } from "./Transportation/checkBalance";
 import { createCostMatrix, createMatrix } from "./Transportation/createMatrix";
-import leastCost from "./Transportation/leastCost";
+import { leastCost } from "./Transportation/leastCost";
 
-export function solveTransportation(data, steps, setSteps) {
+export function solveTransportation(data, steps, setSteps, supplyNodes, demandNodes) {
     // ========================================
     // Get Supply and Demand values from inputs
     // ========================================
+    let i = 0;
+    i++;
 
     const supplyRegex = /^s\d*$/;
     const demandRegex = /^d\d*$/;
@@ -38,7 +40,7 @@ export function solveTransportation(data, steps, setSteps) {
     // ========================================
 
     const { matrix, matrixStep } = createMatrix(suppliesCount, demandsCount);
-    // setSteps((steps) => [...steps, matrixStep]);
+    setSteps((steps) => [...steps, matrixStep]);
 
     const { costMatrix, costMatrixStep } = createCostMatrix(
         costs,
@@ -47,5 +49,14 @@ export function solveTransportation(data, steps, setSteps) {
     );
     // setSteps((steps) => [...steps, costMatrixStep]);
 
-    leastCost(matrix, supplies, demands);
+    const { leastCostMatrix, leastCostMatrixStep } = leastCost(
+        matrix,
+        supplies,
+        demands,
+        supplyNodes,
+        demandNodes
+    );
+    setSteps((steps) => [...steps, leastCostMatrixStep]);
+
+    console.log(i);
 }

@@ -1,3 +1,7 @@
+import { useNodes } from "react-flow-renderer";
+import SolveSection from "../../Components/molecules/SolveSection";
+import TransportTable from "../../Components/molecules/TransportTable";
+
 let matrix,
     sup,
     dem,
@@ -28,11 +32,20 @@ function calculateCell(i, j) {
     return matrix;
 }
 
-export default function (initialMatrix, supplies, demands) {
+export function leastCost(initialMatrix, supplies, demands, supplyNodes, demandNodes) {
     matrix = initialMatrix;
     // convert supply and demand objects to number arrays
     sup = Object.keys(supplies).map((key) => Number(supplies[key]));
     dem = Object.keys(demands).map((key) => Number(demands[key]));
     totalSum = sup.reduce((a, b) => a + b, 0);
-    calculateCell(i, j);
+    const result = calculateCell(i, j);
+
+    return {
+        leastCostMatrixStep: (
+            <SolveSection key="least-cost" title={"Step 1: Initial BFS with Least Cost"}>
+                <TransportTable demands={demandNodes} supplies={supplyNodes} cells={result} />
+            </SolveSection>
+        ),
+        leastCostMatrix: result,
+    };
 }

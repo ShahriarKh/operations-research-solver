@@ -223,7 +223,7 @@ export default function Home() {
 
     const onSubmit = (data) => {
         setSteps([]);
-        solveTransportation(data, steps, setSteps);
+        solveTransportation(data, steps, setSteps, supplies, demands);
     };
 
     const onChange = (changes) => {
@@ -273,6 +273,7 @@ export default function Home() {
                     </div>
                     <div className={css.solver}>
                         <TransportTable
+                            key="table"
                             supplies={supplies}
                             demands={demands}
                             nodes={nodes}
