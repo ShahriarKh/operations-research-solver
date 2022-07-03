@@ -1,7 +1,10 @@
 @use "colors" as *;
 
 .section {
-    margin-top: 48px;
+    &:not(:first-of-type) {
+        margin-top: 48px;
+    }
+    
     width: 100%;
 
     h2 {

@@ -1,5 +1,6 @@
 import { checkBalance } from "./Transportation/checkBalance";
 import { createCostMatrix, createMatrix } from "./Transportation/createMatrix";
+import leastCost from "./Transportation/leastCost";
 
 export function solveTransportation(data, steps, setSteps) {
     // ========================================
@@ -8,7 +9,7 @@ export function solveTransportation(data, steps, setSteps) {
 
     const supplyRegex = /^s\d*$/;
     const demandRegex = /^d\d*$/;
-    const costRegex   = /^s.*d\d*$/;
+    const costRegex = /^s.*d\d*$/;
 
     const supplies = Object.fromEntries(
         Object.entries(data).filter(([key]) => supplyRegex.test(key))
@@ -37,12 +38,14 @@ export function solveTransportation(data, steps, setSteps) {
     // ========================================
 
     const { matrix, matrixStep } = createMatrix(suppliesCount, demandsCount);
-    setSteps((steps) => [...steps, matrixStep]);
+    // setSteps((steps) => [...steps, matrixStep]);
 
-    // alert(matrix)
+    const { costMatrix, costMatrixStep } = createCostMatrix(
+        costs,
+        suppliesCount,
+        demandsCount
+    );
+    // setSteps((steps) => [...steps, costMatrixStep]);
 
-    const { costMatrix, costMatrixStep } = createCostMatrix(costs, suppliesCount, demandsCount)
-    setSteps((steps) => [...steps, costMatrixStep]);
-
-    // alert(costMatrix)
+    leastCost(matrix, supplies, demands);
 }
