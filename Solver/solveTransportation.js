@@ -39,6 +39,10 @@ export function solveTransportation(data, steps, setSteps) {
     const { matrix, matrixStep } = createMatrix(suppliesCount, demandsCount);
     setSteps((steps) => [...steps, matrixStep]);
 
+    // alert(matrix)
+
     const { costMatrix, costMatrixStep } = createCostMatrix(costs, suppliesCount, demandsCount)
     setSteps((steps) => [...steps, costMatrixStep]);
+
+    // alert(costMatrix)
 }

@@ -26,9 +26,10 @@ export default function TransportTable({ demands, supplies }) {
                                         key={`cell ${supply.id},${demand.id}`}
                                         className={css.cell}
                                     >
-                                        0{" "}
+                                        0
                                         <span className={css.cellCost}>
-                                            {watch(`${supply.id}-${demand.id}`)}
+                                            {/* not the correct way to do this */}
+                                            {watch(`${supply.id}-${demand.id}`) || 1}
                                         </span>
                                     </td>
                                 );

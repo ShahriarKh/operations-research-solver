@@ -53,7 +53,7 @@ export default function CustomEdge({
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >
-                <input className={css.cost} {...register(id)} />
+                <input className={css.cost} {...register(id)} defaultValue={1}/>
             </foreignObject>
         </>
     );
