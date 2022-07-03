@@ -1,26 +1,63 @@
+@use "colors" as *;
+
+.page {
+    overflow: auto;
+    height: 100vh;
+}
+
 .solver {
     padding: 0 24px 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    height: 100vh;
-    overflow: auto;
-    flex-grow: 1;
-}
+    // justify-content: flex-start;
+    // height: 100vh;
+    // overflow: auto;
+    // flex-grow: 1;
+    height: auto;
 
-.page {
-    display: flex;
+    input[type="submit"] {
+
+        margin-top: 24px;
+
+        background-color: $teal-dark;
+        color: white;
+        padding: 4px 8px;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all ease 200ms;
+        font-size: 18px;
+
+        &:hover {
+            background-color: $teal;
+        }
+    }
 }
 
 .graph {
-    height: 90vh;
-    width: calc(50vw - 130px);
+    height: 60vh;
+    // width: calc(50vw - 130px);
     cursor: grab;
+    box-shadow: inset -2px 0 8px 2px rgba(0, 0, 0, 0.2);
 }
 
 .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: 16px;
+    padding: 12px 5% 16px;
+
+    button {
+        background-color: $teal-dark;
+        color: white;
+        padding: 4px 8px;
+        font-weight: bold;
+        border-radius: 4px;
+        transition: all ease 200ms;
+
+        &:hover {
+            background-color: $teal;
+        }
+    }
 }

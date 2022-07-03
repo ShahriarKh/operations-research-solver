@@ -1,27 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap");
+
 a {
-  color: inherit;
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-  font-family: "Jetbrains Mono", Consolas, 'Courier New', Courier, monospace;
-  word-spacing: -4px;
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: "Jetbrains Mono", Consolas, "Courier New", Courier, monospace;
+    word-spacing: -4px;
 }
 
-html, body {
-  color: white;
+html,
+body {
+    color: white;
 }
 
 .main {
-  // background-color: red;
-  // overflow: scroll;
-  overflow: hidden;
-  scrollbar-width: thin;
+    // background-color: red;
+    // overflow: scroll;
+    overflow: hidden;
+    scrollbar-width: thin;
 }
-
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -32,4 +34,11 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
     -moz-appearance: textfield;
+}
+
+button,
+input[type="submit"] {
+    border: none;
+    outline: none;
+    cursor: pointer;
 }

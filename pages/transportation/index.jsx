@@ -248,7 +248,7 @@ export default function Home() {
         <>
             <FormProvider {...methods}>
                 <div className={css.page}>
-                    <div className={css.graph} style={{}}>
+                    <div className={css.graph}>
                         {/* <ReactFlowProvider> */}
                         <ReactFlow
                             nodeTypes={nodeTypes}
@@ -266,21 +266,19 @@ export default function Home() {
                             <Controls />
                         </ReactFlow>
                         {/* </ReactFlowProvider> */}
-                        <div className={css.buttons}>
-                            <button onClick={addSupply}>Add Supply</button>
-                            <button onClick={addDemand}>Add Demand</button>
-                        </div>
+                    </div>
+                    <div className={css.buttons}>
+                        <button onClick={addSupply}>+ Add Supply</button>
+                        <button onClick={addDemand}>+ Add Demand</button>
                     </div>
                     <div className={css.solver}>
-                        <SolveSection title="Table">
-                            <TransportTable
-                                supplies={supplies}
-                                demands={demands}
-                                nodes={nodes}
-                            />
-                        </SolveSection>
+                        <TransportTable
+                            supplies={supplies}
+                            demands={demands}
+                            nodes={nodes}
+                        />
                         <form onSubmit={methods.handleSubmit(onSubmit)}>
-                            <input type="submit" />
+                            <input type="submit" value="Solve" />
                         </form>
                         {steps}
                     </div>
