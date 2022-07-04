@@ -6,7 +6,7 @@ import { useFormContext } from "react-hook-form";
 export default function SupplyNode({ id, data }) {
 
     const { register, unregister } = useFormContext();
-    const { setNodes } = useReactFlow();
+    const { setNodes, setEdges } = useReactFlow();
 
     // This is required, so the unregistered input doesn't get registered again
     // https://react-hook-form.com/api/useform/unregister
@@ -14,6 +14,7 @@ export default function SupplyNode({ id, data }) {
 
     function remove() {
         setNodes((nodes) => nodes.filter((node) => node.id !== id));
+        setEdges((edges) => edges.filter((edge) => edge.source !== id))
         unregister(id);
         setInputRegistered(false)
     }
@@ -53,10 +54,7 @@ export default function SupplyNode({ id, data }) {
                         // inputmode="numeric" pattern="\d*"
                     />
                 )}
-
-                {/* <p>{JSON.stringify(getEdges())}</p> */}
             </div>
-
             <Handle type="source" position={Position.Right} />
         </>
     );

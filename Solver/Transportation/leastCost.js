@@ -3,6 +3,7 @@ import SolveSection from "../../Components/molecules/SolveSection";
 import TransportTable from "../../Components/molecules/TransportTable";
 
 let matrix,
+    costMatrix,
     sup,
     dem,
     totalSum = 0,
@@ -11,6 +12,7 @@ let matrix,
     j = 0;
 
 function calculateCell() {
+    let minCost = costs;
     // let maxCell = Math.min(sup[i], dem[j]);
     // matrix.set(i, j, value);
     // currentSum += value;
@@ -32,6 +34,7 @@ function calculateCell() {
 export function leastCost(costs, supplies, demands) {
     // reset every time the function is called
     currentSum = 0;
+    costMatrix = costs;
     // matrix = matrix = Matrix.zeros(sup.length, dem.length);
     const result = 12;
 

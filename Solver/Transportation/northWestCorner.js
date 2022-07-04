@@ -34,8 +34,10 @@ export function northWestCorner(supplies, demands) {
     // reset every time the function is called
     sup = supplies
     dem = demands
+    // cells
     currentSum = 0
     matrix = Matrix.zeros(sup.length, dem.length);
+    // assuming problem is balanced, so sum of supplies = sum od demands and calculating one is enough
     totalSum = sup.reduce((a, b) => a + b, 0);
 
     calculateCell(i, j);

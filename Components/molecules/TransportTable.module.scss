@@ -3,7 +3,7 @@
 .cell {
     // padding: 8px;
     // border: solid red 3px;
-    background-color: $grey;
+    background-color: $gray;
     position: relative;
     // border-radius: 4px;
 }
@@ -44,6 +44,7 @@ $round: 8px;
 
         td {
             padding: 8px;
+            text-align: center;
         }
     }
 }
@@ -53,9 +54,10 @@ $round: 8px;
     top: 0;
     right: 0;
     padding: 4px 4px 4px 8px;
-    border-bottom: solid 2px $grey-dark;
-    border-left: solid 2px $grey-dark;
+    border-bottom: solid 2px $gray-dark;
+    border-left: solid 2px $gray-dark;
     border-bottom-left-radius: 16px;
     font-size: 12px;
-    color: $teal;
+    color: $teal-lighter;
+    background-color: $gray-light;
 }

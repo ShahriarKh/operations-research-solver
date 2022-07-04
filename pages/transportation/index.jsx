@@ -1,28 +1,22 @@
-import { useState, useCallback, useMemo, createElement } from "react";
+import { useState, useCallback, useMemo } from "react";
 import ReactFlow, {
     Background,
     Controls,
     addEdge,
-    // applyEdgeChanges,
-    // applyNodeChanges,
     useNodesState,
     useEdgesState,
-    // ReactFlowProvider,
 } from "react-flow-renderer";
-import {
-    useForm,
-    FormProvider,
-    // useFormContext,
-    // useWatch,
-} from "react-hook-form";
+import { useForm, FormProvider } from "react-hook-form";
+
 import SupplyNode from "../../Components/atoms/SupplyNode";
 import DemandNode from "../../Components/atoms/DemandNode";
 import CustomEdge from "../../Components/atoms/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
-import SolveSection from "../../Components/molecules/SolveSection";
+// import SolveSection from "../../Components/molecules/SolveSection";
 
 import { solveTransportation } from "../../Solver/solveTransportation";
+// import ViewHandler from "../../Components/ViewHandler";
 
 const supplyX = 0;
 const supplyYIncrease = 100;
@@ -111,7 +105,7 @@ const graphOptions = {
     // snapToGrid: true,
     // snapGrid: [20, 20],
     // nodesDraggable: false,
-    maxZoom: 1,
+    // maxZoom: 1,
     panOnScrollMode: "vertical",
 };
 
@@ -184,6 +178,8 @@ export default function Home() {
                 )
             )
         );
+
+        // fitView();
     }
 
     function addDemand() {
@@ -223,7 +219,7 @@ export default function Home() {
 
     const onSubmit = (data) => {
         setSteps([]);
-        solveTransportation(data, steps, setSteps, supplies, demands);
+        solveTransportation(data, setSteps, supplies, demands);
     };
 
     const onChange = (changes) => {
@@ -249,7 +245,6 @@ export default function Home() {
             <FormProvider {...methods}>
                 <div className={css.page}>
                     <div className={css.graph}>
-                        {/* <ReactFlowProvider> */}
                         <ReactFlow
                             nodeTypes={nodeTypes}
                             edgeTypes={edgeTypes}
@@ -261,12 +256,14 @@ export default function Home() {
                             onConnect={onConnect}
                             {...graphOptions}
                             fitView
+                            deleteKeyCode="Delete"
                         >
                             <Background />
                             <Controls />
+                            <p>{JSON.stringify(edges)}</p>
                         </ReactFlow>
-                        {/* </ReactFlowProvider> */}
                     </div>
+
                     <div className={css.buttons}>
                         <button onClick={addSupply}>+ Add Supply</button>
                         <button onClick={addDemand}>+ Add Demand</button>
@@ -288,21 +285,3 @@ export default function Home() {
         </>
     );
 }
-
-// // import css from './index.module.scss'
-// import { matrix, size } from "mathjs";
-// import { useState } from "react";
-
-// const damn = matrix([
-//     [0, 1],
-//     [10, 9],
-//     [13, 40],
-// ]); // Matrix
-
-// export default function index(params) {
-//     // const [cells, setCells] = useState(damn);
-
-//     function updateCells(i, j, newValue) {
-//         damn._data[i][j] = newValue;
-//         console.log(damn._data);
-//     }

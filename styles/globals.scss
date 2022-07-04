@@ -11,6 +11,8 @@ a {
     margin: 0;
     font-family: "Jetbrains Mono", Consolas, "Courier New", Courier, monospace;
     word-spacing: -4px;
+    // font-variant-numeric: slashed-zero;
+    // font-feature-settings: 'zero' 0; 
 }
 
 html,

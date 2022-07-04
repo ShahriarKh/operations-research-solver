@@ -5,7 +5,7 @@ import { useFormContext } from "react-hook-form";
 
 export default function DemandNode({ id, data }) {
     const { register, unregister } = useFormContext();
-    const { setNodes } = useReactFlow();
+    const { setNodes, setEdges } = useReactFlow();
 
     // This is required, so the unregistered input doesn't get registered again
     // https://react-hook-form.com/api/useform/unregister
@@ -13,8 +13,9 @@ export default function DemandNode({ id, data }) {
 
     function remove() {
         setNodes((nodes) => nodes.filter((node) => node.id !== id));
+        setEdges((edges) => edges.filter((edge) => edge.target !== id));
         unregister(id);
-        setInputRegistered(false)
+        setInputRegistered(false);
     }
 
     return (
