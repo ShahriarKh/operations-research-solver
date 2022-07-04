@@ -1,29 +1,25 @@
-// import SolveSection from "../../Components/molecules/SolveSection";
 import { Matrix } from "ml-matrix";
+import { useReactFlow } from "react-flow-renderer";
 
-// export function createMatrix(suppliesCount, demandsCount) {
-//     const matrix = Matrix.zeros(suppliesCount, demandsCount);
+export function createCostMatrix(suppliesCount, demandsCount) {
+    // const { getEdges } = useReactFlow();
+    // const costs = getEdges();
 
-//     return {
-//         matrixStep: (
-//             <SolveSection title={"Step 2: Matrix"}>
-//                 <p>{JSON.stringify(matrix)}</p>
-//             </SolveSection>
-//         ),
-//         matrix: matrix,
-//     };
-// }
+    // alert(JSON.stringify(costs));
 
-export function createCostMatrix(costs, suppliesCount, demandsCount) {
-    const costMatrix = Matrix.zeros(suppliesCount, demandsCount);
-    const iRegex = /^s(.*)-.*/;
-    const jRegex = /.*-d(.*)/;
+    // const costMatrix = Matrix.zeros(suppliesCount, demandsCount);
+    // const iRegex = /^s(.*)-.*/;
+    // const jRegex = /.*-d(.*)/;
 
-    Object.keys(costs).forEach((cost) => {
-        const i = cost.match(iRegex)[1] - 1;
-        const j = cost.match(jRegex)[1] - 1;
-        costMatrix.set(i, j, costs[cost]);
-    });
+    // console.log(costs);
+    // console.log(costMatrix.data);
 
-    return costMatrix
+    // Object.keys(costs).forEach((cost) => {
+    // const i = cost.match(iRegex)[1] - 1;
+    // const j = cost.match(jRegex)[1] - 1;
+    // costMatrix.set(i, j, costs[cost]);
+    // });
+    // console.warn(costMatrix.data);
+
+    return costMatrix;
 }

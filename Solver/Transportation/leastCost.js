@@ -1,6 +1,5 @@
 import Matrix from "ml-matrix";
-import SolveSection from "../../Components/molecules/SolveSection";
-import TransportTable from "../../Components/molecules/TransportTable";
+import { useReactFlow } from "react-flow-renderer"
 
 let matrix,
     costMatrix,
@@ -10,6 +9,9 @@ let matrix,
     currentSum = 0,
     i = 0,
     j = 0;
+
+const iRegex = /^s(.*)-.*/;
+const jRegex = /.*-d(.*)/;
 
 function calculateCell() {
     let minCost = costs;
@@ -31,12 +33,20 @@ function calculateCell() {
     // return matrix;
 }
 
-export function leastCost(costs, supplies, demands) {
+export function leastCost(data, supplies, demands) {
+    // alert(JSON.stringify(costs));
+    console.log(data);
+
+    // sup = supplies;
+    // dem = demands;
+    // matrix = Matrix.zeros(sup.length, dem.length);
+
+    
     // reset every time the function is called
-    currentSum = 0;
-    costMatrix = costs;
+    // currentSum = 0;
+    // costMatrix = costs;
     // matrix = matrix = Matrix.zeros(sup.length, dem.length);
-    const result = 12;
+    // const result = 12;
 
     return matrix;
 }

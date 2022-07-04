@@ -1,6 +1,7 @@
 import css from "./CustomEdge.module.scss";
 import { getBezierPath, getBezierEdgeCenter } from "react-flow-renderer";
 import { useFormContext } from "react-hook-form";
+import { useEffect, useRef } from "react";
 
 const foreignObjectSize = 40;
 
@@ -15,7 +16,17 @@ export default function CustomEdge({
     style = {},
     markerEnd,
 }) {
-    const { register } = useFormContext();
+    const { register, unregister } = useFormContext();
+
+    const mounted = useRef(false);
+
+    useEffect(() => {
+        mounted.current = true;
+        return () => {
+            unregister(id);
+            mounted.current = false;
+        };
+    }, []);
 
     const edgePath = getBezierPath({
         sourceX,
@@ -33,7 +44,6 @@ export default function CustomEdge({
         targetY,
         curvature: 0.25,
     });
-
 
     return (
         <>
@@ -53,21 +63,25 @@ export default function CustomEdge({
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >
-                <input className={css.cost} {...register(id)} defaultValue={1}/>
+                {mounted.current && (
+                    <input
+                        className={css.cost}
+                        {...register(id)}
+                        defaultValue={1}
+                    />
+                )}
             </foreignObject>
         </>
     );
 }
 
-
 // function onEdgeClick(e, id) {
 //     // e.stopPropagation();
 // }
 
+// const ref = createRef();
+// const [coords, setCoords] = useState({ x: 0, y: 0 });
 
-    // const ref = createRef();
-    // const [coords, setCoords] = useState({ x: 0, y: 0 });
-
-    // useEffect(() => {
-    //     setCoords(ref.current.getPointAtLength(150));
-    // }, [sourceX, sourceY, targetX, targetY]);
+// useEffect(() => {
+//     setCoords(ref.current.getPointAtLength(150));
+// }, [sourceX, sourceY, targetX, targetY]);

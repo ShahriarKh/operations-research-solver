@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import ReactFlow, {
     Background,
     Controls,
@@ -13,10 +13,7 @@ import DemandNode from "../../Components/atoms/DemandNode";
 import CustomEdge from "../../Components/atoms/CustomEdge";
 import TransportTable from "../../Components/molecules/TransportTable";
 import css from "./style.module.scss";
-// import SolveSection from "../../Components/molecules/SolveSection";
-
 import { solveTransportation } from "../../Solver/solveTransportation";
-// import ViewHandler from "../../Components/ViewHandler";
 
 const supplyX = 0;
 const supplyYIncrease = 100;

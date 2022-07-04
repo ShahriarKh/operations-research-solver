@@ -71,7 +71,7 @@ export function solveTransportation(
     // Create Cost Matrix
     // ========================================
 
-    let costMatrix = createCostMatrix(costsObject, suppliesCount, demandsCount);
+    // let costMatrix = createCostMatrix(costsObject, suppliesCount, demandsCount);
 
     // ========================================
     // North-west Corner
@@ -96,7 +96,7 @@ export function solveTransportation(
     // Least Cost
     // ========================================
 
-    // let leastCostMatrix = leastCost(costMatrix, suppliesArray, demandsArray);
+    let leastCostMatrix = leastCost(data, suppliesArray, demandsArray);
     // let lcComp = (
     //     <SolveSection
     //         key="least-cost"
