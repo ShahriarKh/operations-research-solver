@@ -1,4 +1,3 @@
-import { useNodes } from "react-flow-renderer";
 import SolveSection from "../../Components/molecules/SolveSection";
 import TransportTable from "../../Components/molecules/TransportTable";
 
@@ -32,7 +31,7 @@ function calculateCell(i, j) {
     return matrix;
 }
 
-export function leastCost(initialMatrix, supplies, demands, supplyNodes, demandNodes) {
+export function northWestCorner(initialMatrix, supplies, demands, supplyNodes, demandNodes) {
     matrix = initialMatrix;
     // convert supply and demand objects to number arrays
     sup = Object.keys(supplies).map((key) => Number(supplies[key]));
@@ -41,11 +40,11 @@ export function leastCost(initialMatrix, supplies, demands, supplyNodes, demandN
     const result = calculateCell(i, j);
 
     return {
-        leastCostMatrixStep: (
-            <SolveSection key="least-cost" title={"Step 1: Initial BFS with Least Cost"}>
+        northWestMatrixStep: (
+            <SolveSection key="north-west" title={"Step 1: Initial BFS with North West Corner method"}>
                 <TransportTable demands={demandNodes} supplies={supplyNodes} cells={result} />
             </SolveSection>
         ),
-        leastCostMatrix: result,
+        northWestMatrix: result,
     };
 }

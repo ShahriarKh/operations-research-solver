@@ -1,6 +1,6 @@
 import { checkBalance } from "./Transportation/checkBalance";
 import { createCostMatrix, createMatrix } from "./Transportation/createMatrix";
-import { leastCost } from "./Transportation/leastCost";
+import { northWestCorner } from "./Transportation/northWestCorner";
 
 export function solveTransportation(data, steps, setSteps, supplyNodes, demandNodes) {
     // ========================================
@@ -49,14 +49,14 @@ export function solveTransportation(data, steps, setSteps, supplyNodes, demandNo
     );
     // setSteps((steps) => [...steps, costMatrixStep]);
 
-    const { leastCostMatrix, leastCostMatrixStep } = leastCost(
+    const { northwWestMatrix, northWestMatrixStep } = northWestCorner(
         matrix,
         supplies,
         demands,
         supplyNodes,
         demandNodes
     );
-    setSteps((steps) => [...steps, leastCostMatrixStep]);
+    setSteps((steps) => [...steps, northWestMatrixStep]);
 
     console.log(i);
 }
