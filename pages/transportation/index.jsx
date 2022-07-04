@@ -69,28 +69,28 @@ const initialEdges = [
         source: "s1",
         target: "d1",
         type: "customedge",
-        hidden: false,
+        animated: false,
     },
     {
         id: "s2-d1",
         source: "s2",
         target: "d1",
         type: "customedge",
-        hidden: false,
+        animated: false,
     },
     {
         id: "s1-d2",
         source: "s1",
         target: "d2",
         type: "customedge",
-        hidden: false,
+        animated: false,
     },
     {
         id: "s2-d2",
         source: "s2",
         target: "d2",
         type: "customedge",
-        hidden: false,
+        animated: false,
     },
 ];
 
@@ -136,7 +136,7 @@ export default function Home() {
                         ...connection,
                         type: "customedge",
                         id: `${connection.source}-${connection.target}`,
-                        hidden: false,
+                        animated: false,
                     },
                     edges
                 )
@@ -169,7 +169,7 @@ export default function Home() {
                         source: `s${supplyNumber}`,
                         target: demand.id,
                         id: `s${supplyNumber}-${demand.id}`,
-                        hidden: false,
+                        animated: false,
                     },
                     edges
                 )
@@ -204,7 +204,7 @@ export default function Home() {
                         source: supply.id,
                         target: `d${demandNumber}`,
                         id: `${supply.id}-d${demandNumber}`,
-                        hidden: false,
+                        animated: false,
                     },
                     edges
                 )
@@ -220,19 +220,25 @@ export default function Home() {
     };
 
     const onChange = (changes) => {
+        console.log("edge change", changes);
         const selectionChange = changes.find(
-            (change) => change.type === "select"
+            (change) => change.selected === true
         );
         if (selectionChange) {
+            console.log(selectionChange);
             setEdges((currentEdges) => {
                 return currentEdges.map((edge) => {
-                    if (edge.id === selectionChange.id) return edge;
-                    return {
-                        ...edge,
-                        hidden: selectionChange.selected,
-                    };
+                    if (edge.id === selectionChange.id) {
+                        return { ...edge, animated: true };
+                    } else {
+                        return { ...edge, animated: false };
+                    }
                 });
             });
+        } else {
+            setEdges((currentEdges) =>
+                currentEdges.map((edge) => ({ ...edge, animated: false }))
+            );
         }
         onEdgesChange(changes);
     };

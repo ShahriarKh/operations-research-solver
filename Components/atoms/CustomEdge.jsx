@@ -1,7 +1,7 @@
 import css from "./CustomEdge.module.scss";
 import { getBezierPath, getBezierEdgeCenter } from "react-flow-renderer";
 import { useFormContext } from "react-hook-form";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const foreignObjectSize = 40;
 
@@ -18,13 +18,13 @@ export default function CustomEdge({
 }) {
     const { register, unregister } = useFormContext();
 
-    const mounted = useRef(false);
+    const [isMounted, setIsMounted] = useState(false);
 
     useEffect(() => {
-        mounted.current = true;
+        setIsMounted(true);
         return () => {
             unregister(id);
-            mounted.current = false;
+            setIsMounted(false);
         };
     }, []);
 
@@ -63,11 +63,13 @@ export default function CustomEdge({
                 className="edgebutton-foreignobject"
                 requiredExtensions="http://www.w3.org/1999/xhtml"
             >
-                {mounted.current && (
+                {/* <p>{mounted.current ? "m" : "z"}</p> */}
+                {isMounted && (
                     <input
                         className={css.cost}
                         {...register(id)}
                         defaultValue={1}
+                        // key={id}
                     />
                 )}
             </foreignObject>

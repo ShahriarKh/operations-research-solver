@@ -1,5 +1,5 @@
 import Matrix from "ml-matrix";
-import { useReactFlow } from "react-flow-renderer"
+import { useReactFlow } from "react-flow-renderer";
 
 let matrix,
     costMatrix,
@@ -13,40 +13,21 @@ let matrix,
 const iRegex = /^s(.*)-.*/;
 const jRegex = /.*-d(.*)/;
 
-function calculateCell() {
-    let minCost = costs;
-    // let maxCell = Math.min(sup[i], dem[j]);
-    // matrix.set(i, j, value);
-    // currentSum += value;
-    // sup[i] -= value;
-    // dem[j] -= value;
-    // if (value === sup[i] + value) {
-    //     i++;
-    //     // console.log("we move down");
-    // } else {
-    //     j++;
-    //     // console.log("we move right");
-    // }
-    // if (currentSum < totalSum) {
-    //     calculateCell(i, j);
-    // }
-    // return matrix;
-}
+function calculateCell() {}
 
-export function leastCost(data, supplies, demands) {
-    // alert(JSON.stringify(costs));
-    console.log(data);
+export function leastCost(costs, supplies, demands) {
+    alert(JSON.stringify(costs));
 
-    // sup = supplies;
-    // dem = demands;
-    // matrix = Matrix.zeros(sup.length, dem.length);
+    sup = supplies;
+    dem = demands;
+    matrix = Matrix.zeros(sup.length, dem.length);
 
-    
-    // reset every time the function is called
-    // currentSum = 0;
-    // costMatrix = costs;
-    // matrix = matrix = Matrix.zeros(sup.length, dem.length);
-    // const result = 12;
+    Object.keys(costs).forEach((cost) => {
+        const i = cost.match(iRegex)[1] - 1;
+        const j = cost.match(jRegex)[1] - 1;
+        console.log(i, j, costs[cost]);
+        // costMatrix.set(i, j, costs[cost]);
+    });
 
     return matrix;
 }

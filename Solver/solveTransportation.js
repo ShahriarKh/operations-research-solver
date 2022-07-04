@@ -96,7 +96,7 @@ export function solveTransportation(
     // Least Cost
     // ========================================
 
-    let leastCostMatrix = leastCost(data, suppliesArray, demandsArray);
+    let leastCostMatrix = leastCost(costsObject, suppliesArray, demandsArray);
     // let lcComp = (
     //     <SolveSection
     //         key="least-cost"
