@@ -1,13 +1,13 @@
 import SolveSection from "../../Components/molecules/SolveSection";
 
-export function checkBalance(supplies, demands) {
-    const suppliesSum = Object.values(supplies).reduce((accumulator, value) => {
-        return parseInt(accumulator) + parseInt(value);
-    }, 0);
+export function checkBalance(suppliesSum, demandsSum) {
+    // const suppliesSum = Object.values(supplies).reduce((accumulator, value) => {
+    //     return parseInt(accumulator) + parseInt(value);
+    // }, 0);
 
-    const demandsSum = Object.values(demands).reduce((accumulator, value) => {
-        return parseInt(accumulator) + parseInt(value);
-    }, 0);
+    // const demandsSum = Object.values(demands).reduce((accumulator, value) => {
+    //     return parseInt(accumulator) + parseInt(value);
+    // }, 0);
 
     let component;
     const supplyMinusDemand = suppliesSum - demandsSum;

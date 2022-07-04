@@ -1,5 +1,4 @@
-import SolveSection from "../../Components/molecules/SolveSection";
-import TransportTable from "../../Components/molecules/TransportTable";
+import Matrix from "ml-matrix";
 
 let matrix,
     sup,
@@ -31,20 +30,15 @@ function calculateCell(i, j) {
     return matrix;
 }
 
-export function northWestCorner(initialMatrix, supplies, demands, supplyNodes, demandNodes) {
-    matrix = initialMatrix;
-    // convert supply and demand objects to number arrays
-    sup = Object.keys(supplies).map((key) => Number(supplies[key]));
-    dem = Object.keys(demands).map((key) => Number(demands[key]));
+export function northWestCorner(supplies, demands) {
+    // reset every time the function is called
+    sup = supplies
+    dem = demands
+    currentSum = 0
+    matrix = Matrix.zeros(sup.length, dem.length);
     totalSum = sup.reduce((a, b) => a + b, 0);
-    const result = calculateCell(i, j);
 
-    return {
-        northWestMatrixStep: (
-            <SolveSection key="north-west" title={"Step 1: Initial BFS with North West Corner method"}>
-                <TransportTable demands={demandNodes} supplies={supplyNodes} cells={result} />
-            </SolveSection>
-        ),
-        northWestMatrix: result,
-    };
+    calculateCell(i, j);
+
+    return matrix;
 }
